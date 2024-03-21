@@ -28,7 +28,7 @@ pipeline {
                      dir('product'){
                          docker.withRegistry("https://${ECR_PATH}", "ecr:${REGION}:${AWS_CREDENTIAL_ID}"){
                          def product_image = docker.build("${ECR_PATH}/${PRODUCT_IMAGE}")
-                         product_image.push("v${env.BUILD_NUMBER}")
+                         product_image.push("v4")
                          }
                      }
 
@@ -72,7 +72,7 @@ pipeline {
          stage('CleanUp Images'){
              steps{
                    sh""" 
-                   docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:v$BUILD_NUMBER
+                   docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:v4
                    docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:latest
                    """
         //         sh"""
@@ -100,13 +100,13 @@ pipeline {
               sh "git config --global user.name ${GIT_USERNAME}"
               dir('PRD/version'){        
                 echo "update yamls"
-                sh "sed 's/${TAG}/v${BUILD_NUMBER}/' value_init.yaml > value_v${BUILD_NUMBER}.yaml" 
+                sh "sed 's/${TAG}/v4/' value_init.yaml > value_v4.yaml" 
                 sh 'rm ../values.yaml'
-                sh "cp value_v${BUILD_NUMBER}.yaml ../values.yaml"
+                sh "cp value_v4.yaml ../values.yaml"
 	      }
 	      dir('PRD'){
 	        sh 'git add . '
-                sh 'git commit -m "commit manifest${BUILD_NUMBER}"'
+                sh 'git commit -m "commit manifest4"'
                 sh 'git push origin main'
               }
             }         
