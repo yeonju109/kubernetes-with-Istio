@@ -106,7 +106,7 @@ pipeline {
             sh "cp value_v4.yaml ../values.yaml"
 	    sh 'git add . '
             sh 'git commit -m "commit manifest${BUILD_NUMBER}"'
-            sh 'git push origin master'
+            sh 'git push origin main'
             }
             }         
         }
