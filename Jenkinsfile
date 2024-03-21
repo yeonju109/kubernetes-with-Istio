@@ -98,17 +98,17 @@ pipeline {
                   branch: 'main'
               sh "git config --global user.email ${GIT_EMAIL}"
               sh "git config --global user.name ${GIT_USERNAME}"
-            dir('PRD/version'){        
-              echo "update yamls"
-              sh "sed 's/${TAG}/${TAG}4/' value_init.yaml > value_v4.yaml"
-              sh 'rm ../values.yaml'
-              sh "cp value_v4.yaml ../values.yaml"
-	    }
-	    dir('PRD'){
-	      sh 'git add . '
-              sh 'git commit -m "commit manifest${BUILD_NUMBER}"'
-              sh 'git push origin main'
-            }
+              dir('PRD/version'){        
+                echo "update yamls"
+                sh "sed 's/${TAG}/${TAG}${BUILD_NUMBER}/' value_init.yaml > value_v${BUILD_NUMBER}.yaml" 
+                sh 'rm ../values.yaml'
+                sh "cp values_v${BUILD_NUMBER}.yaml ../values.yaml"
+	      }
+	      dir('PRD'){
+	        sh 'git add . '
+                sh 'git commit -m "commit manifest${BUILD_NUMBER}"'
+                sh 'git push origin main'
+              }
             }         
         }
     }
