@@ -102,7 +102,7 @@ pipeline {
                 echo "update yamls"
                 sh "sed 's/${TAG}/${TAG}${BUILD_NUMBER}/' value_init.yaml > value_v${BUILD_NUMBER}.yaml" 
                 sh 'rm ../values.yaml'
-                sh "cp values_v${BUILD_NUMBER}.yaml ../values.yaml"
+                sh "cp value_v${BUILD_NUMBER}.yaml ../values.yaml"
 	      }
 	      dir('PRD'){
 	        sh 'git add . '
