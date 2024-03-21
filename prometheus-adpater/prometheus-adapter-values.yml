@@ -1,0 +1,80 @@
+prometheus:
+  url: http://prometheus.istio-system.svc.cluster.local
+  port: 9090
+
+rules:
+  custom:
+  #istio request duration
+  
+  # product
+  - seriesQuery: 'istio_request_duration_milliseconds_bucket{reporter="destination", destination_workload_namespace="default", destination_workload="product"}'
+    resources:
+      overrides:
+        destination_workload_namespace:
+          resource: "namespace"
+        destination_workload:
+          resource: "deployment"
+    name:
+      as: "request_duration_seconds_90ile"
+    metricsQuery: 'sum(histogram_quantile(0.90, sum(irate(<<.Series>>{<<.LabelMatchers>>, reporter="destination"}[5m])) by (le,<<.GroupBy>>))) by (<<.GroupBy>>) / 1000'
+  
+  # cart 
+  - seriesQuery: 'istio_request_duration_milliseconds_bucket{reporter="destination", destination_workload_namespace="default", destination_workload="cart"}'
+    resources:
+      overrides:
+        destination_workload_namespace:
+          resource: "namespace"
+        destination_workload:
+          resource: "deployment"
+    name:
+      as: "request_duration_seconds_90ile"
+    metricsQuery: 'sum(histogram_quantile(0.90, sum(irate(<<.Series>>{<<.LabelMatchers>>, reporter="destination"}[5m])) by (le,<<.GroupBy>>))) by (<<.GroupBy>>) / 1000'
+  
+  # order
+  - seriesQuery: 'istio_request_duration_milliseconds_bucket{reporter="destination", destination_workload_namespace="default", destination_workload="order"}'
+    resources:
+      overrides:
+        destination_workload_namespace:
+          resource: "namespace"
+        destination_workload:
+          resource: "deployment"
+    name:
+      as: "request_duration_seconds_90ile"
+    metricsQuery: 'sum(histogram_quantile(0.90, sum(irate(<<.Series>>{<<.LabelMatchers>>, reporter="destination"}[5m])) by (le,<<.GroupBy>>))) by (<<.GroupBy>>) / 1000'
+  
+  # frontend
+  - seriesQuery: 'istio_request_duration_milliseconds_bucket{reporter="destination", destination_workload_namespace="default", destination_workload="frontend"}'
+    resources:
+      overrides:
+        destination_workload_namespace:
+          resource: "namespace"
+        destination_workload:
+          resource: "deployment"
+    name:
+      as: "request_duration_seconds_90ile"
+    metricsQuery: 'sum(histogram_quantile(0.90, sum(irate(<<.Series>>{<<.LabelMatchers>>, reporter="destination"}[5m])) by (le,<<.GroupBy>>))) by (<<.GroupBy>>) / 1000'
+  
+  # rating
+  - seriesQuery: 'istio_request_duration_milliseconds_bucket{reporter="destination", destination_workload_namespace="default", destination_workload="rating"}'
+    resources:
+      overrides:
+        destination_workload_namespace:
+          resource: "namespace"
+        destination_workload:
+          resource: "deployment"
+    name:
+      as: "request_duration_seconds_90ile"
+    metricsQuery: 'sum(histogram_quantile(0.90, sum(irate(<<.Series>>{<<.LabelMatchers>>, reporter="destination"}[5m])) by (le,<<.GroupBy>>))) by (<<.GroupBy>>) / 1000'
+  
+  # user
+  - seriesQuery: 'istio_request_duration_milliseconds_bucket{reporter="destination", destination_workload_namespace="default", destination_workload="user"}'
+    resources:
+      overrides:
+        destination_workload_namespace:
+          resource: "namespace"
+        destination_workload:
+          resource: "deployment"
+    name:
+      as: "request_duration_seconds_90ile"
+    metricsQuery: 'sum(histogram_quantile(0.90, sum(irate(<<.Series>>{<<.LabelMatchers>>, reporter="destination"}[5m])) by (le,<<.GroupBy>>))) by (<<.GroupBy>>) / 1000'
+  
