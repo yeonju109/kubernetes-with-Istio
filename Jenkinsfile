@@ -71,13 +71,13 @@ pipeline {
         }
          stage('CleanUp Images'){
              steps{
-         //          sh""" 
-          //         docker rmi ${ECR_PATH}/${FRONT_IMAGE}:v$BUILD_NUMBER
-           //        docker rmi ${ECR_PATH}/${FRONT_IMAGE}:latest
-            //       """
-                 sh"""
-                 docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:v$BUILD_NUMBER
-                 docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:latest
+                   sh""" 
+                   docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:v$BUILD_NUMBER
+                   docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:latest
+                   """
+        //         sh"""
+        //         docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:v$BUILD_NUMBER
+        //         docker rmi ${ECR_PATH}/${PRODUCT_IMAGE}:latest
         //         docker rmi ${ECR_PATH}/${FRONT_IMAGE}:v$BUILD_NUMBER
         //         docker rmi ${ECR_PATH}/${FRONT_IMAGE}:latest
         //         docker rmi ${ECR_PATH}/${USER_IMAGE}:v$BUILD_NUMBER
@@ -88,7 +88,7 @@ pipeline {
         //         docker rmi ${ECR_PATH}/${CART_IMAGE}:latest
         //         docker rmi ${ECR_PATH}/${RATING_IMAGE}:v$BUILD_NUMBER
         //         docker rmi ${ECR_PATH}/${RATING_IMAGE}:latest
-                 """
+        //         """
              }
          }
         stage("update manifest"){
