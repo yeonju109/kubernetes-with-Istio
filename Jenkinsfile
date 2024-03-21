@@ -100,7 +100,7 @@ pipeline {
               sh "git config --global user.name ${GIT_USERNAME}"
               dir('PRD/version'){        
                 echo "update yamls"
-                sh "sed 's/${TAG}/${TAG}${BUILD_NUMBER}/' value_init.yaml > value_v${BUILD_NUMBER}.yaml" 
+                sh "sed 's/${TAG}/v${BUILD_NUMBER}/' value_init.yaml > value_v${BUILD_NUMBER}.yaml" 
                 sh 'rm ../values.yaml'
                 sh "cp value_v${BUILD_NUMBER}.yaml ../values.yaml"
 	      }
